@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.movie-input{
+  padding: 30px;
+  width: 70%;
+  margin: 10vh auto;
+  box-shadow: 0px 0px 5px 0px grey;
+  border-radius: 20px;
+}
+.movie-input button{
+  width: 100%;
+}
+.movie-input *{
+  margin-top: 10px;
+  text-align: center;
+}
