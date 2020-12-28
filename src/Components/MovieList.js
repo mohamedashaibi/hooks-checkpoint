@@ -4,14 +4,13 @@ import { useState } from 'react';
 
 const MovieList = (props) => {
 
-    return <div >
+    return <div className="row">
         {console.log("stars = " + props.searchrate)}
         {console.log(props.searchrate!==0?props.searchrate:true)}
         {props.items.map(function(item){
-            {console.log(item.rate == (props.searchrate!==0?props.searchrate:item.rate))}
             if(item.title.includes(props.searchtext) && item.rate == (props.searchrate!==0?props.searchrate:item.rate)){
-               return <div className="row container">
-                    <MovieCard className="col-sm-4" title={item.title} description={item.description} url={item.url} rate={item.rate}/>
+               return <div className="col-sm-4">
+                    <MovieCard id={item.id} title={item.title} description={item.description} url={item.url} rate={item.rate}/>
                 </div>;
             }
             }

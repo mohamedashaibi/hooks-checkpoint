@@ -13,8 +13,34 @@ import './App.css';
 import MovieList from  './Components/MovieList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import data from './Components/data';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams,
+  BrowserRouter
+} from "react-router-dom";
+import Trailer from "./Components/Trailer";
+
 
 const App = () => {
+  
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/Movies/:id">
+          <Trailer/>
+        </Route>
+        <Route exact path="/" component={Home}/>
+      </Switch>
+    </BrowserRouter>    
+  );
+}
+
+const Home = () =>{
   const [items, setItems] = useState(data);
   const [title, setTitle] = useState('');
   const [postUrl, setPostUrl] = useState('');
@@ -24,25 +50,22 @@ const App = () => {
   const [searchRate, setSearchRate] = useState(0);
 
   const AddBtnClick = () => {
-    const newItem = {
+    var newItem = {
       title: title,
       description: description,
       url: postUrl,
       rate: rate 
     }
-    const newItems = [...data, newItem];
+    const newItems = [...items, newItem];
     setItems(newItems);
-    console.log(items);
+    console.log("new items = "+newItems);
+    console.log("items = "+items);
   }
 
   const ratingChanged = (newRating) => {
     setSearchRate(newRating);
   };
-
-  return (
-    
-    <div className="App">
-{searchText}
+  return <div className="App">
         <input className="form-control" placeholder="Search" value={searchText} onChange={(event)=>setSearchText(event.target.value)}/>
         <ReactStars
           count={5}
@@ -64,8 +87,11 @@ const App = () => {
       <div className="movie-list">
         <MovieList items={items} searchtext={searchText} searchrate={searchRate}/>
       </div>
-    </div>
-  );
+      {/* <Router>
+        <Route exact path="/" component={App} />
+        <Route path="/movies/:id" component={MovieCard} />
+      </Router> */}
+    </div>;
 }
 
 export default App;
